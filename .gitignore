@@ -3,3 +3,6 @@ bin
 
 # obj files
 *.o
+
+# IDE config
+.vscode
