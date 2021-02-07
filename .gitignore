@@ -1,0 +1,5 @@
+# binary directories
+bin
+
+# obj files
+*.o
