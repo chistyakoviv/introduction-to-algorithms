@@ -1,0 +1,2 @@
+# Implementation of algorithms and data structures in C++.
+## All implementations based on the book Introduction to algorithms authored by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rives, Clifford Stein — 3rd ed.
