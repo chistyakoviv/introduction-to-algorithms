@@ -2,7 +2,7 @@ OUTDIR := bin
 BINARIES := InsertionSort
 OUT := $(patsubst %,$(OUTDIR)/%,$(BINARIES))
 CXX := g++
-CXXFLAGS := -Wall -Werror
+CXXFLAGS := -Wall -Werror --std=c++17
 
 .PHONY: all clean directories
 
