@@ -1,5 +1,5 @@
 OUTDIR := bin
-BINARIES := InsertionSort SelectionSort MergeSort
+BINARIES := InsertionSort SelectionSort MergeSort BubbleSort
 OUT := $(patsubst %,$(OUTDIR)/%,$(BINARIES))
 CXX := g++
 CXXFLAGS := -Wall -Werror --std=c++17
