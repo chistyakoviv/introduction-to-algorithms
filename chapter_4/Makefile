@@ -1,5 +1,5 @@
 OUTDIR := bin
-BINARIES := FindMaximumSubarray FindMaximumSubarrayNonRecursive ComplexNumberMultiplaction
+BINARIES := FindMaximumSubarray FindMaximumSubarrayNonRecursive ComplexNumberMultiplaction SquareMatrixMultiplyRecursive
 OUT := $(patsubst %,$(OUTDIR)/%,$(BINARIES))
 CXX := g++
 CXXFLAGS := -Wall -Werror --std=c++17
