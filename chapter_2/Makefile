@@ -1,21 +1,19 @@
 OUTDIR := bin
-BINARIES := InsertionSort SelectionSort MergeSort BubbleSort
-OUT := $(patsubst %,$(OUTDIR)/%,$(BINARIES))
+BINARIES := $(shell find -name "*.cpp")
+OUT := $(patsubst ./%.cpp, $(OUTDIR)/%, $(BINARIES))
 CXX := g++
 CXXFLAGS := -Wall -Werror --std=c++17
 
-.PHONY: all clean directories
+.PHONY: all clean
 
-all: directories $(OUT)
+all: $(OUT)
 
 clean:
 	rm -rf *.o bin
-
-directories:
-	mkdir $(OUTDIR)
 
 %.o : %.cpp
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 $(OUTDIR)/% : %.o
+	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $< -o $@
