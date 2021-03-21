@@ -1,6 +1,6 @@
 #include "Matrix.h"
 
-// Recursive algorithm
+// Strassen's algorithm
 SquareMatrix SquareMatrixMultiplication(const SquareMatrix& A, const SquareMatrix& B)
 {
     size_t n = std::min(A.size(), B.size());
@@ -24,14 +24,29 @@ SquareMatrix SquareMatrixMultiplication(const SquareMatrix& A, const SquareMatri
     SquareMatrix B21 = SquareMatrix::createPartition(B, middle + 1, n - 1, 0, middle);
     SquareMatrix B22 = SquareMatrix::createPartition(B, middle + 1, n - 1, middle + 1, n - 1);
 
-    SquareMatrix C11 = SquareMatrixMultiplication(A11, B11)
-                     + SquareMatrixMultiplication(A12, B21);
-    SquareMatrix C12 = SquareMatrixMultiplication(A11, B12)
-                     + SquareMatrixMultiplication(A12, B22);
-    SquareMatrix C21 = SquareMatrixMultiplication(A21, B11)
-                     + SquareMatrixMultiplication(A22, B21);
-    SquareMatrix C22 = SquareMatrixMultiplication(A21, B12)
-                     + SquareMatrixMultiplication(A22, B22);
+    SquareMatrix S1 = B12 - B22;
+    SquareMatrix S2 = A11 + A12;
+    SquareMatrix S3 = A21 + A22;
+    SquareMatrix S4 = B21 - B11;
+    SquareMatrix S5 = A11 + A22;
+    SquareMatrix S6 = B11 + B22;
+    SquareMatrix S7 = A12 - A22;
+    SquareMatrix S8 = B21 + B22;
+    SquareMatrix S9 = A11 - A21;
+    SquareMatrix S10 = B11 + B12;
+
+    SquareMatrix P1 = A11 * S1;
+    SquareMatrix P2 = S2 * B22;
+    SquareMatrix P3 = S3 * B11;
+    SquareMatrix P4 = A22 * S4;
+    SquareMatrix P5 = S5 * S6;
+    SquareMatrix P6 = S7 * S8;
+    SquareMatrix P7 = S9 * S10;
+
+    SquareMatrix C11 = P5 + P4 - P2 + P6;
+    SquareMatrix C12 = P1 + P2;
+    SquareMatrix C21 = P3 + P4;
+    SquareMatrix C22 = P5 + P1 - P3 - P7;
 
     std::vector<SquareMatrix> partitions;
     partitions.push_back(C11);

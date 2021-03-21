@@ -42,12 +42,12 @@ public:
         return m_Elements[index];
     }
 
-    SquareMatrix operator*(const SquareMatrix& other)
+    SquareMatrix operator*(const SquareMatrix& other) const
     {
         if (size() != other.size())
             return *this;
 
-        return SquareMatrixMultiplicationRecursive(*this, other);
+        return SquareMatrixMultiplication(*this, other);
     }
 
     SquareMatrix operator+(const SquareMatrix& other)
@@ -62,6 +62,24 @@ public:
             for (size_t j = 0; j < size(); j++)
             {
                 result[i][j] = m_Elements[i][j] + other[i][j];
+            }
+        }
+
+        return result;
+    }
+
+    SquareMatrix operator-(const SquareMatrix& other)
+    {
+        if (size() != other.size())
+            return *this;
+
+        SquareMatrix result(size());
+
+        for (size_t i = 0; i < size(); i++)
+        {
+            for (size_t j = 0; j < size(); j++)
+            {
+                result[i][j] = m_Elements[i][j] - other[i][j];
             }
         }
 
@@ -136,7 +154,7 @@ public:
         return result;
     }
 
-    friend SquareMatrix SquareMatrixMultiplicationRecursive(const SquareMatrix& A, const SquareMatrix& B);
+    friend SquareMatrix SquareMatrixMultiplication(const SquareMatrix& A, const SquareMatrix& B);
 private:
     std::vector<std::vector<int32_t>> m_Elements;
 };
