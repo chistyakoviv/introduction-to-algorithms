@@ -108,10 +108,10 @@ public:
         size_t size = std::min(rows, cols);
         SquareMatrix partition(size);
 
-        size_t row = 0, col = 0;
+        size_t row = 0;
         for (size_t i = startRow; i < startRow + size; i++)
         {
-            col = 0;
+            size_t col = 0;
             for (size_t j = startColumn; j < startColumn + size; j++)
             {
                 partition[row][col++] = matrix[i][j];
@@ -135,12 +135,12 @@ public:
 
         for (size_t i = 0; i < partitions.size(); i++)
         {
-            size_t row = 0, col = 0;
+            size_t row = 0;
             // For partitions 0, 1 we fill the rows of the resulting matrix from 0 to size - 1
             // and for partitions 2, 3 we fill the rows of the resulting matrix from size to size * 2 - 1.
             for (size_t j = (size_t)(0.5f * i) % 2 * size; j < ((size_t)(0.5f * i) % 2 + 1) * size; j++)
             {
-                col = 0;
+                size_t col = 0;
                 // For partitions 0, 2 we fill the columns of the resulting matrix from 0 to size - 1
                 // and for partitions 1, 3 we fill the columns of the resulting matrix from size to size * 2 - 1.
                 for (size_t k = i % 2 * size; k < (i % 2 + 1) * size; k++)
