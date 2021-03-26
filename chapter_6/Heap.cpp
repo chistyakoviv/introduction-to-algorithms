@@ -53,31 +53,18 @@ protected:
     size_t m_HeapSize;
 };
 
-size_t numDigits(int32_t number)
-{
-    size_t digits = 0;
-    if (number < 0) digits = 1;
-    while (number) {
-        number /= 10;
-        digits++;
-    }
-    return digits;
-}
-
 std::ostream& operator<<(std::ostream& os, const Heap& heap)
 {
-    // The size of the last level is heap.length() / 2
-    // and to add space between neighbor elements we
+    // The size of the last level is 2^lg(heap.length()).
+    // To add space between neighbor elements we
     // double the size and add one.
-    size_t lastLevelSize = heap.length() + 2;
+    size_t lastLevelSize = pow(2, floor(log2(heap.length()))) * 2 + 1;
     size_t currentLevel = 0;
 
     for (size_t i = 0; i < heap.length(); i++)
     {
         size_t level = floor(log2(i + 1));
-        size_t offset = lastLevelSize / (level + 2);
-
-        offset -= numDigits(heap[i]);
+        size_t offset = lastLevelSize / (pow(2, level) + 1);
 
         if (level != currentLevel)
         {
